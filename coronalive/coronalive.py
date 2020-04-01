@@ -94,8 +94,11 @@ class MainWindow(tk.Tk):
     def add_linechart(self):
 
         df = pandas.DataFrame.from_records(data_glb_tl)
+        df['cases'].replace('',0, inplace=True)
         df['cases'] = df['cases'].astype(int)
+        df['deaths'].replace('', 0, inplace=True)
         df['deaths'] = df['deaths'].astype(int)
+        df['recovered'].replace('', 0, inplace=True)
         df['recovered'] = df['recovered'].astype(int)
         df = df.groupby('date')[['cases', 'deaths']].sum().reset_index()
         #now = datetime.datetime.now()
